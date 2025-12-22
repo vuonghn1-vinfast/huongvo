@@ -94,7 +94,7 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
 
-    /* --- HIỆU ỨNG BÓ HOA MỚI --- */
+    /* --- BÓ HOA TỰ ĐỘNG HIỆN --- */
     .flower-bouquet {
       position: fixed;
       bottom: -100px;
@@ -147,12 +147,12 @@
     <div id="response" class="response">Cảm ơn em! Từ nay, anh là của em rồi đó 💕</div>
   </div>
 
-  <!-- Bó hoa động -->
+  <!-- Bó hoa động (tự hiện khi mở web) -->
   <div class="flower-bouquet" id="flower-bouquet">💐</div>
 
-  <!-- Nhạc nền -->
+  <!-- Nhạc nền (link raw đã sửa) -->
   <audio id="bg-music" loop>
-    <source src="https://github.com/vuonghn1-vinfast/huongvo/blob/main/music.mp3  " type="audio/mpeg">
+    <source src="https://raw.githubusercontent.com/vuonghn1-vinfast/huongvo/main/music.mp3" type="audio/mpeg">
   </audio>
   <button id="audio-control" onclick="toggleAudio()">▶️</button>
 
@@ -213,11 +213,18 @@
     function showResponse() {
       document.getElementById("response").style.opacity = "1";
       createHearts();
-      showFlowerBouquet(); // ← kích hoạt bó hoa
       tryPlayMusic();
     }
 
+    // Bật nhạc sau tương tác đầu tiên (chính sách trình duyệt)
     document.body.addEventListener('click', tryPlayMusic, { once: true });
+
+    // 💐 TỰ ĐỘNG HIỆN BÓ HOA SAU 1.5 GIÂY KHI MỞ WEB
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        showFlowerBouquet();
+      }, 1500);
+    });
   </script>
 </body>
 </html>
