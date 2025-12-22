@@ -93,6 +93,32 @@
       display: none;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
+
+    /* --- HIỆU ỨNG BÓ HOA MỚI --- */
+    .flower-bouquet {
+      position: fixed;
+      bottom: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 3.5rem;
+      z-index: 100;
+      opacity: 0;
+      transition: bottom 0.8s cubic-bezier(0.2, 0.8, 0.3, 1), opacity 0.5s;
+    }
+    .flower-bouquet.show {
+      bottom: 120px;
+      opacity: 1;
+    }
+    .flower-bouquet.animate {
+      animation: swayFlower 2.2s ease-in-out infinite;
+    }
+    @keyframes swayFlower {
+      0% { transform: translateX(-50%) rotate(0deg); }
+      25% { transform: translateX(-50%) rotate(4deg); }
+      50% { transform: translateX(-50%) rotate(0deg); }
+      75% { transform: translateX(-50%) rotate(-4deg); }
+      100% { transform: translateX(-50%) rotate(0deg); }
+    }
   </style>
 </head>
 <body>
@@ -121,9 +147,12 @@
     <div id="response" class="response">Cảm ơn em! Từ nay, anh là của em rồi đó 💕</div>
   </div>
 
-  <!-- Nhạc nền từ file local -->
+  <!-- Bó hoa động -->
+  <div class="flower-bouquet" id="flower-bouquet">💐</div>
+
+  <!-- Nhạc nền -->
   <audio id="bg-music" loop>
-    <source src="https://github.com/vuonghn1-vinfast/huongvo/blob/main/music.mp3" type="audio/mpeg">
+    <source src="https://github.com/vuonghn1-vinfast/huongvo/blob/main/music.mp3  " type="audio/mpeg">
   </audio>
   <button id="audio-control" onclick="toggleAudio()">▶️</button>
 
@@ -173,9 +202,18 @@
       }
     }
 
+    function showFlowerBouquet() {
+      const bouquet = document.getElementById('flower-bouquet');
+      bouquet.classList.add('show', 'animate');
+      setTimeout(() => {
+        bouquet.classList.remove('show', 'animate');
+      }, 3500);
+    }
+
     function showResponse() {
       document.getElementById("response").style.opacity = "1";
       createHearts();
+      showFlowerBouquet(); // ← kích hoạt bó hoa
       tryPlayMusic();
     }
 
