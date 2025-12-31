@@ -50,6 +50,12 @@
       color: #555;
       margin-bottom: 28px;
     }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
     .btn {
       padding: 13px 38px;
       font-size: 1.25rem;
@@ -143,14 +149,20 @@
       Em cười – anh vui. Em buồn – anh lo.<br>
       Thế giới có 8 tỷ người… mà anh chỉ muốn <em>nắm tay em</em> thôi.
     </p>
-    <button class="btn" onclick="showResponse()">Đồng ý làm người yêu anh nhé? 💖</button>
+
+    <div class="options">
+      <button class="btn" onclick="chooseOption('A')">A. Có… 💖</button>
+      <button class="btn" onclick="chooseOption('B')">B. Yes… 💖</button>
+      <button class="btn" onclick="chooseOption('C')">trênC. Cả 2 đ
+    </div>
+
     <div id="response" class="response">Cảm ơn em! Từ nay, anh là của em rồi đó 💕</div>
   </div>
 
   <!-- Bó hoa động (tự hiện khi mở web) -->
   <div class="flower-bouquet" id="flower-bouquet">💐</div>
 
-  <!-- Nhạc nền (link raw đã sửa) -->
+  <!-- Nhạc nền -->
   <audio id="bg-music" loop>
     <source src="https://raw.githubusercontent.com/vuonghn1-vinfast/huongvo/main/music.mp3" type="audio/mpeg">
   </audio>
@@ -210,16 +222,27 @@
       }, 7500);
     }
 
-    function showResponse() {
-      document.getElementById("response").style.opacity = "1";
-      createHearts();
-      tryPlayMusic();
+    function chooseOption(choice) {
+      const response = document.getElementById("response");
+      if (choice === 'A') {
+        response.style.opacity = "1";
+        createHearts();
+        tryPlayMusic();
+      } else if (choice === 'B') {
+        response.style.opacity = "1";
+        createHearts();
+        tryPlayMusic();
+      } else if (choice === 'C') {
+        response.style.opacity = "1";
+        createHearts();
+        tryPlayMusic();
+      }
     }
 
-    // Bật nhạc sau tương tác đầu tiên (chính sách trình duyệt)
+    // Bật nhạc sau tương tác đầu tiên
     document.body.addEventListener('click', tryPlayMusic, { once: true });
 
-    // 💐 TỰ ĐỘNG HIỆN BÓ HOA SAU 1.5 GIÂY KHI MỞ WEB
+    // Tự động hiện bó hoa sau 1.5 giây
     window.addEventListener('load', () => {
       setTimeout(() => {
         showFlowerBouquet();
