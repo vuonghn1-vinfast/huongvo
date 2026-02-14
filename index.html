@@ -603,19 +603,6 @@
       }
     }
 
-    // Show flower bouquet animation
-    function showFlowerBouquet() {
-      // Reset animation
-      flowerBouquet.classList.remove('show');
-      void flowerBouquet.offsetWidth; // Trigger reflow
-      flowerBouquet.classList.add('show');
-      
-      // Hide after animation completes
-      setTimeout(() => {
-        flowerBouquet.classList.remove('show');
-      }, 8000);
-    }
-
     // Main click handler for the entire page
     document.body.addEventListener('click', (e) => {
       // Ignore clicks on the audio control button
@@ -638,9 +625,6 @@
       createRingEffect(e.clientX, e.clientY);
       createHeartsAtPosition(e.clientX, e.clientY);
       createConfetti(e.clientX, e.clientY);
-      
-      // Show flower bouquet
-      showFlowerBouquet();
       
       // Make sure music is playing
       if (audio.paused) {
