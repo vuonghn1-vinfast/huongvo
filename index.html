@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>💕 Dành Riêng Cho Hường 💕</title>
+  <title>💕 Happy Valentine’s Day, Hường 💕</title>
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -178,11 +178,12 @@
     }
 
     .subtitle {
-      font-size: 1rem;
+      font-size: 1.1rem;
       color: #c44569;
-      margin-bottom: 20px;
-      opacity: 0.8;
+      margin-bottom: 25px;
+      opacity: 0.85;
       animation: pulse 3s ease-in-out infinite;
+      font-weight: 600;
     }
 
     @keyframes pulse {
@@ -192,23 +193,27 @@
 
     p {
       font-size: 1.15rem;
-      line-height: 2;
+      line-height: 1.8;
       color: #6b4a5e;
       margin-bottom: 30px;
       font-weight: 500;
+      padding: 0 10px;
     }
 
     p strong {
       color: #e55a8c;
       font-weight: 700;
+      display: block;
+      margin: 12px 0;
     }
 
     p em {
       color: #c44569;
       font-style: normal;
       background: linear-gradient(120deg, rgba(255, 182, 193, 0.4), rgba(221, 160, 221, 0.4));
-      padding: 2px 8px;
-      border-radius: 10px;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-weight: 600;
     }
 
     .btn {
@@ -307,7 +312,7 @@
       border-radius: 50%;
       font-size: 1.3rem;
       cursor: pointer;
-      display: none;
+      display: block;
       box-shadow: 
         0 5px 20px rgba(219, 112, 147, 0.3),
         0 0 20px rgba(255, 182, 193, 0.3);
@@ -417,8 +422,9 @@
 
     /* Mobile responsive */
     @media (max-width: 600px) {
-      h1 { font-size: 2.2rem; }
-      p { font-size: 1rem; }
+      h1 { font-size: 2.3rem; }
+      .subtitle { font-size: 1rem; }
+      p { font-size: 1rem; line-height: 1.7; }
       .btn { padding: 14px 35px; font-size: 1.1rem; }
       .content { padding: 25px; margin: 15px; }
       .flower-bouquet { font-size: 4rem; }
@@ -479,18 +485,20 @@
   </script>
 
   <div class="content">
-    <h1>✨ Hường ơi… anh thích em rồi! ✨</h1>
-    <p class="subtitle">💕 Một lời từ trái tim 💕</p>
+    <h1>✨ Happy Valentine’s Day, Hường! ✨</h1>
+    <p class="subtitle">💕 May your day be as beautiful as your soul 💕</p>
     <p>
-      Nhân dịp ngày valentine 14/2…<br>
-      Anh chỉ muốn em biết:<br><br>
-      <strong>🌹 Mỗi lần thấy em, anh đều thấy lòng ấm lại.</strong><br><br>
-      Em cười – anh vui. Em buồn – anh lo.<br>
-      Thế giới có 8 tỷ người…<br>
-      mà anh chỉ muốn <em>nắm tay em</em> thôi. 💑
+      Dear Hường,<br><br>
+      
+      Wishing you to grow more beautiful every single day,<br>
+      to be filled with endless joy,<br>
+      and to find great success and true happiness in everything you do.<br><br>
+      
+      You truly deserve all the wonderful things this world can offer.<br>
+      Happy Valentine’s Day! 💖
     </p>
-    <button class="btn" onclick="showResponse()">💖 Đồng ý làm người yêu anh nhé? 💖</button>
-    <div id="response" class="response">🎉 Cảm ơn em! Từ nay, anh là của em rồi đó 💕🎉</div>
+    <button class="btn" onclick="showResponse()">💖 Thank You for Being You, Hường! 💖</button>
+    <div id="response" class="response">🌷 Your presence makes my world brighter. Happy Valentine’s Day! 💕</div>
   </div>
 
   <!-- Bó hoa động -->
@@ -500,24 +508,18 @@
   <audio id="bg-music" loop>
     <source src="https://raw.githubusercontent.com/vuonghn1-vinfast/huongvo/main/music.mp3" type="audio/mpeg">
   </audio>
-  <button id="audio-control" onclick="toggleAudio()">▶️</button>
+  <button id="audio-control" onclick="toggleAudio()">⏸️</button>
 
   <script>
     const audio = document.getElementById('bg-music');
     const audioControl = document.getElementById('audio-control');
 
-    function tryPlayMusic() {
-      audio.volume = 0.3;
-      const playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          audioControl.style.display = 'block';
-          audioControl.innerHTML = '⏸️';
-        }).catch(() => {
-          audioControl.style.display = 'block';
-        });
-      }
-    }
+    window.addEventListener('load', () => {
+      audio.volume = 0.25;
+      // Try to play on load (may require user interaction on some browsers)
+      audio.play().catch(() => {});
+      audioControl.innerHTML = '⏸️';
+    });
 
     function toggleAudio() {
       if (audio.paused) {
@@ -595,34 +597,32 @@
     function showResponse() {
       const response = document.getElementById("response");
       response.classList.add("show");
-      response.style.opacity = "1";
       createHearts();
       createConfetti();
       showFlowerBouquet();
-      tryPlayMusic();
       
-      // Create ring effect at button location
+      if (audio.paused) {
+        audio.play().catch(() => {});
+        audioControl.innerHTML = '⏸️';
+      }
+      
       const btn = document.querySelector('.btn');
       const rect = btn.getBoundingClientRect();
       createRingEffect(rect.left + rect.width/2, rect.top + rect.height/2);
     }
 
-    // Click effect anywhere
     document.body.addEventListener('click', (e) => {
-      createRingEffect(e.clientX, e.clientY);
+      if (!e.target.closest('.btn') && !e.target.closest('#audio-control')) {
+        createRingEffect(e.clientX, e.clientY);
+      }
     });
 
-    // Bật nhạc sau tương tác đầu tiên
-    document.body.addEventListener('click', tryPlayMusic, { once: true });
-
-    // Tự động hiện bó hoa sau 2 giây
     window.addEventListener('load', () => {
       setTimeout(() => {
         showFlowerBouquet();
       }, 2000);
     });
 
-    // Thêm sparkle mới định kỳ
     setInterval(() => {
       const sparkle = document.createElement('div');
       sparkle.className = 'sparkle';
